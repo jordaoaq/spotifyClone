@@ -1,13 +1,11 @@
 import React from 'react';
 import Main from '../components/Main';
-import Sidebar from '../components/Sidebar';
 
 const Home = () => {
     return (
-        <>
-            <Sidebar/>
-            <Main/>
-        </>
+        <div className="home">
+            <Main />
+        </div>
     );
 };
 

@@ -3,11 +3,18 @@ import cors from "cors";
 import { db } from './connect.js';
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 10000;
 
-app.use(cors());
+// Em server.js, configure o CORS corretamente
+app.use(cors({
+    origin: ['http://localhost:5173', 'https://spotify-clone-a5pv3u89g-jordaoaqs-projects.vercel.app'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 app.listen(PORT, () => {
-    
+    console.log(`Servidor rodando na porta ${PORT}`);
 });
 
 app.get('/', (request, response) => {
@@ -15,9 +22,15 @@ app.get('/', (request, response) => {
 });
 
 app.get('/artists', async(request, response) => {
-    response.send(await db.collection("artists").find({}).toArray());
+    try {
+        const artists = await db.collection("artists").find({}).toArray();
+        console.log("Artistas encontrados:", artists.length);
+        response.json(artists);
+    } catch (error) {
+        console.error("Erro ao buscar artistas:", error);
+        response.status(500).json({ error: "Erro ao buscar artistas" });
+    }
 });
-
 
 app.get('/songs', async(request, response) => {
     response.send(await db.collection("songs").find({}).toArray());

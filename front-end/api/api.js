@@ -1,9 +1,25 @@
 import axios from "axios";
 
-const URL = "http://localhost:3000"
+const URL = import.meta.env.VITE_API_URL;
 
-const responseArtists = await axios.get(`${URL}/artists`);
-const responseSongs = await axios.get(`${URL}/songs`);
+export let artistArray = [];
+export let songsArray = [];
 
-export const artistArray = responseArtists.data;
-export const songsArray = responseSongs.data;
+async function fetchData() {
+    try {
+        const [responseArtists, responseSongs] = await Promise.all([
+            axios.get(`${URL}/artists`),
+            axios.get(`${URL}/songs`)
+        ]);
+        
+        artistArray = responseArtists.data;
+        songsArray = responseSongs.data;
+        
+        console.log("Dados carregados:", { artistArray, songsArray });
+    } catch (error) {
+        console.error("Erro ao buscar dados:", error);
+    }
+}
+
+// Executa a função imediatamente
+fetchData();
