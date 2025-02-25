@@ -7,7 +7,11 @@ const PORT = process.env.PORT || 10000;
 
 // Em server.js, configure o CORS corretamente
 app.use(cors({
-    origin: ['http://localhost:5173', 'https://spotify-clone-a5pv3u89g-jordaoaqs-projects.vercel.app'],
+    origin: [
+        'http://localhost:5173',
+        'http://127.0.0.1:5173',
+        'https://spotify-clone-a5pv3u89g-jordaoaqs-projects.vercel.app'
+    ],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization']
