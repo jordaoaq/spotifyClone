@@ -6,8 +6,10 @@ const app = express();
 const PORT = process.env.PORT || 10000;
 const cors = require("cors");
 
-// Em server.js, configure o CORS corretamente
-app.use(cors());
+app.use(cors({
+    origin: "https://spotify-clone-tau-six-29.vercel.app"
+}));
+
 
 
 app.listen(PORT, () => {
