@@ -4,7 +4,7 @@ import { db } from './connect.js';
 
 const app = express();
 const PORT = process.env.PORT || 10000;
-const cors = require("cors");
+
 
 app.use(cors({
     origin: "https://spotify-clone-tau-six-29.vercel.app"
