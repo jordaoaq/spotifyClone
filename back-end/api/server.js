@@ -4,6 +4,7 @@ import { db } from './connect.js';
 
 const app = express();
 const PORT = process.env.PORT || 10000;
+const cors = require("cors");
 
 // Em server.js, configure o CORS corretamente
 app.use(cors({
@@ -13,8 +14,7 @@ app.use(cors({
         'https://spotify-clone-a5pv3u89g-jordaoaqs-projects.vercel.app'
     ],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    credentials: true,
-    allowedHeaders: ['Content-Type', 'Authorization']
+    allowedHeaders: ['Content-Type']
 }));
 
 app.listen(PORT, () => {
@@ -39,4 +39,7 @@ app.get('/artists', async(request, response) => {
 app.get('/songs', async(request, response) => {
     response.send(await db.collection("songs").find({}).toArray());
 });
+
+app.use(express.json()); // Para permitir JSON nas requisições
+
 
