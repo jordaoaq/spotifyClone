@@ -7,15 +7,8 @@ const PORT = process.env.PORT || 10000;
 const cors = require("cors");
 
 // Em server.js, configure o CORS corretamente
-app.use(cors({
-    origin: [
-        'http://localhost:5173',
-        'http://127.0.0.1:5173',
-        'https://spotify-clone-a5pv3u89g-jordaoaqs-projects.vercel.app'
-    ],
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type']
-}));
+app.use(cors());
+
 
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);
